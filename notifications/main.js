@@ -3,10 +3,19 @@
 	var simpleNotification = document.querySelector('.simple-notification');
 	var main = document.querySelector('main');
 	var closeNotification = document.querySelector('.close-notification');
-	var interval = 5000;
+	var location = document.querySelector('.simple-notification .location');
+	var time = document.querySelector('.simple-notification .time');
+	var date = document.querySelector('.simple-notification .date');
+	
+	var interval = 3000;
+	var root = 'http://api.leandervanbaekel.nl';
+	
+	var pushNotificationAvailable;
 	var currentAlarm;
 	var newAlarm;
-	var pushNotificationAvailable;
+	var currentAlarmId;
+	var newAlarmId;
+
 
 	simpleNotification.classList.add('hide');
 
@@ -55,11 +64,6 @@
 		} else if(pushNotificationAvailable == false) {
 			
 			main.classList.add('blur');
-
-			var location = document.querySelector('.simple-notification .location');
-			var time = document.querySelector('.simple-notification .time');
-			var date = document.querySelector('.simple-notification .date');
-
 			
 			location.innerHTML = 'Locatie: ' + data.location;
 			time.innerHTML = 'Tijdstip: ' + data.time;
@@ -69,37 +73,13 @@
 		}
 	}
 
-	// function renderSimpleNotification(data) {
-
-
-	// 	var location = document.querySelector('.simple-notification .location');
-	// 	var time = document.querySelector('.simple-notification .time');
-	// 	var date = document.querySelector('.simple-notification .date');
-
-		
-	// 	location.innerHTML = 'Locatie: ' + data.location;
-	// 	time.innerHTML = 'Tijdstip: ' + data.time;
-	// 	date.innerHTML = 'Datum: ' + data.day + '/' + data.month + '/' + data.year;
-
-	// 	console.log(data);
-	// };
-
-	// function pushNotification() {
-	// 	// new Notification('Buurt preventie: dealer overlast', {
-	// 	// 	body: 'Mogelijke deal activiteiten gesignaleerd op Soembawastraat 6 - Oost'
-	// 	// })
-	// };
-	
-
-
-
 	function checkAlarm(data) {
 	
 		currentAlarm = newAlarm
 		newAlarm = data._id;
 
 		if(currentAlarm !== newAlarm && currentAlarm !== undefined){
-			// alert('new alarm, currentAlarm: ' + currentAlarm + ' newAlarm: ' + newAlarm)
+
 			sendNotification(data);
 		}
 
@@ -108,11 +88,6 @@
 	}
 
 	function getData(){
-		var currentAlarmId;
-		var newAlarmId;
-
-		var root = 'http://api.leandervanbaekel.nl';
-
 		aja()
 		  .url(root + '/alarm/latest')
 		  .type('json')
