@@ -28,9 +28,18 @@ main {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background-color: #ffffff;
-	border: 2px solid grey;
+	border-radius: 0.5rem;
+	border: 2px solid #354052;
+	text-align: center;
 }
 
+.simple-notification > * {
+	color: #354052;
+}
+
+.simple-notification svg {
+	fill: #354052;
+}
 .close-notification {
     width: 1em;
     position: absolute;

@@ -17,7 +17,7 @@
 	var newAlarmId;
 
 
-	simpleNotification.classList.add('hide');
+	// simpleNotification.classList.add('hide');
 
 	closeNotification.onclick = function() {
 		simpleNotification.classList.add('hide')
